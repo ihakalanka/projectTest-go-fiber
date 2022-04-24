@@ -2,7 +2,7 @@ import {useState} from "react";
 import axios from "axios";
 import {Navigate, Link} from 'react-router-dom';
 
-export const Register = () => {
+const Register = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -67,3 +67,5 @@ export const Register = () => {
         </main>
     );
 }
+
+export default Register;

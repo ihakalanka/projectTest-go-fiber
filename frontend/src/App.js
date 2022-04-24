@@ -1,13 +1,15 @@
 import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import {Login} from "./components/Login";
-import {Register} from "./components/Register";
-import {Home} from "./components/Home";
+
 import {Nav} from "./components/nav";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {Home} from "./components/home";
+import {Login} from "./components/login";
 import Forgot from "./components/forgot";
 import Reset from "./components/reset";
+import Register from "./components/register";
+
 
 function App() {
   const [firstName, setFirstName] = useState('');
