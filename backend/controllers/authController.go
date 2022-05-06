@@ -23,6 +23,7 @@ func Register(c *fiber.Ctx) error {
 		FirstName: data["firstName"],
 		LastName:  data["lastName"],
 		Email:     data["email"],
+		Role:      "client",
 		Password:  string(password),
 	}
 
@@ -68,6 +69,12 @@ func Login(c *fiber.Ctx) error {
 			"message": "could not login",
 		})
 	}
+
+	if data["email"] == "admin@gmail.com" && data["password"] == "admin" {
+		user.Role = "admin"
+	}
+
+	user.Role = "client"
 
 	cookie := fiber.Cookie{
 		Name:     "jwt",
@@ -117,5 +124,31 @@ func Logout(c *fiber.Ctx) error {
 	c.Cookie(&cookie)
 	return c.JSON(fiber.Map{
 		"message": "success",
+	})
+}
+
+func UserIndex(c *fiber.Ctx) error {
+	var data map[string]string
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+
+	var user models.User
+
+	database.DB.Where("email = ?", data["email"]).First(&user)
+
+	if user.Role == "client" {
+		return c.JSON(fiber.Map{
+			"message": "Hello client",
+		})
+	}
+	if user.Email != "admin@gmail.com" {
+		return c.JSON(fiber.Map{
+			"message": "Hello admin",
+		})
+	}
+
+	return c.JSON(fiber.Map{
+		"message": "Error with client function",
 	})
 }

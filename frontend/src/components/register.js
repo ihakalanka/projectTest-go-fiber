@@ -1,6 +1,6 @@
 import {useState} from "react";
 import axios from "axios";
-import {Navigate, Link} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 
 const Register = () => {
     const [firstName, setFirstName] = useState('');
@@ -54,12 +54,6 @@ const Register = () => {
                            onChange={e => setPassword(e.target.value)}
                     />
                     <label htmlFor="floatingPassword">Password</label>
-                </div>
-
-                <div className="mb-2" >
-                    <Link to="/forgot">
-                        Forgot password?
-                    </Link>
                 </div>
 
                 <button className="w-100 btn btn-lg btn-primary" type="submit">Submit</button>

@@ -1,20 +1,26 @@
 import React, {useState} from 'react';
-import {Link, Navigate} from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 import axios from "axios";
 
-const Reset = (props) => {
+const Reset = () => {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [navigate, setNavigate] = useState(false);
 
-    const submit = async (e) => {
+    const token = useParams();
+    const submit = (e) => {
         e.preventDefault();
 
-        await axios.post('http://localhost:8080/api/register', {
-            token: props.match.params.token,
+        console.log(token);
+        console.log(password);
+        console.log(passwordConfirm);
+        axios.post('http://localhost:8080/api/reset', {
+            token,
             password,
-            password_confirm: passwordConfirm
+            password_confirm: passwordConfirm,
         });
+
+
 
         setNavigate(true);
     }
@@ -25,7 +31,7 @@ const Reset = (props) => {
 
     return (
         <main className="form-signin">
-            <form onSubmit={submit}>
+            <form>
                 <h1 className="h3 mb-3 fw-normal">Please reset your password</h1>
 
                 <div className="form-floating">
@@ -39,16 +45,10 @@ const Reset = (props) => {
                     <input type="password" className="form-control mb-3" id="floatingPassword" placeholder="Password Confirm"
                            onChange={e => setPasswordConfirm(e.target.value)}
                     />
-                    <label htmlFor="floatingPassword">Password</label>
+                    <label htmlFor="floatingPassword">Password Confirm</label>
                 </div>
 
-                <div className="mb-2" >
-                    <Link to="/forgot">
-                        Forgot password?
-                    </Link>
-                </div>
-
-                <button className="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+                <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={submit}>Submit</button>
             </form>
         </main>
     );

@@ -1,6 +1,7 @@
 import axios from "axios";
-import {Navigate} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import {useState} from "react";
+import data from "bootstrap/js/src/dom/data";
 
 export const Login = () => {
     const [email, setEmail] = useState('');
@@ -23,7 +24,6 @@ export const Login = () => {
         return <Navigate to="/" />;
     }
 
-
     return <main className="form-signin">
         <form>
             <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
@@ -40,6 +40,12 @@ export const Login = () => {
                        onChange={e => setPassword(e.target.value)}
                 />
                 <label htmlFor="floatingPassword">Password</label>
+            </div>
+
+            <div className="mb-2" >
+                <Link to="/forgot">
+                    Forgot password?
+                </Link>
             </div>
 
             <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={submit}>
