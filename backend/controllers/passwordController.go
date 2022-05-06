@@ -56,7 +56,7 @@ func Reset(c *fiber.Ctx) error {
 
 	if data["password"] != data["password_confirm"] {
 		return c.Status(400).JSON(fiber.Map{
-			"message": "password do not match",
+			"message": "password does not match",
 		})
 	}
 
