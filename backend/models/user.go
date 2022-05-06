@@ -8,12 +8,12 @@ type User struct {
 	FirstName string `json:"firstName"`
 	LastName  string `json:"lastName"`
 	Email     string `gorm:"unique" json:"email"`
-	//Password  []byte `json:"password"`
-	Password string `json:"password"`
+	Password  string `json:"password"`
+	Role      string `json:"role"`
 }
 
 type PasswordReset struct {
-	Id    uint
-	Email string
+	Id    uint   `json:"id"`
+	Email string `json:"email"`
 	Token string `gorm:"unique"`
 }
